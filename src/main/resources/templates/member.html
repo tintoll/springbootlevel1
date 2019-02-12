@@ -5,7 +5,25 @@
 <body>
 
     <div class="content-wrapper" layout:fragment="content_body">
-        member
+
+
+        <form method="post" th:object="${member}">
+            아이디 : <input type="text" name="username" th:field="*{username}"/>
+            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            <br>
+            패스워드 : <input type="password" name="password" th:field="*{password}"/>
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
+            <input type="submit" value="전송" />
+        </form>
+
+        <hr>
+        <div th:each="member : ${list}">
+            유저 이름 : <span th:text="${member.username}" ></span>
+            유저 패스워드  : <span th:text="${member.password}" ></span>
+        </div>
+
+
     </div>
 
 </body>
