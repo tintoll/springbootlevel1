@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,8 +12,12 @@
         <ul>
             <li><a href="/">홈4</a></li>
             <li><a href="/member">멤버</a></li>
-            <li><a href="#">게시판</a></li>
-            <li><a href="#">어드민페이지</a></li>
+            <li><a href="/board">게시판</a></li>
+            <li><a href="/admin">어드민페이지</a></li>
+            <li><a href="/usersample">유저페이지</a></li>
+            <li sec:authorize="isAuthenticated()">
+                <a href="/logout">로그아웃</a>
+            </li>
         </ul>
     </nav>
 </body>
