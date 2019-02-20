@@ -1,6 +1,9 @@
 package io.tintoll.springbootlevel1.config;
 
+import io.tintoll.springbootlevel1.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+    // Inmemory
+    /*
     @Bean
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
@@ -53,6 +58,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("USER").build()
         );
         return manager;
+    }
+    */
+
+    @Autowired MemberService memberService;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(memberService);
     }
 
     @Bean

@@ -2,12 +2,11 @@ package io.tintoll.springbootlevel1.domain;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -27,6 +26,9 @@ public class Member {
     @Length(min = 2)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<MemberAuthority> authorities = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -50,5 +52,13 @@ public class Member {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<MemberAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<MemberAuthority> authorities) {
+        this.authorities = authorities;
     }
 }
